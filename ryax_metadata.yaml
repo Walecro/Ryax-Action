@@ -15,7 +15,7 @@ spec:
   - help: Test_Value_To_Print
     human_name: Test_Value_To_Print
     name: test
-    type: "int"
+    type: "integer"
     default_value: 1.0
   outputs:
   - help: For testing
