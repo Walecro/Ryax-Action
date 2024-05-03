@@ -22,4 +22,4 @@ spec:
     human_name: Test integer
     name: test_int
     type: "integer"
-    optimal: true
+    optional: true
