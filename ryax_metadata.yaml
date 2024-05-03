@@ -21,6 +21,6 @@ spec:
   - help: For testing
     human_name: Test integer
     name: test_int
-    type: integer
+    type: "integer"
     optimal: true
   outputs: []
