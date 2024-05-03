@@ -1,0 +1,26 @@
+
+apiVersion: "1.0"
+kind: Processor
+spec:
+  id: test
+  human_name: Custom_Action
+  type: python3
+  version: "1.3"
+  description: "Test"
+  logo: "logo.jpg"
+  categories:
+  - Action
+  - Custom 
+  inputs:
+  - help: Test_Value_To_Print
+    human_name: Test_Value_To_Print
+    name: test
+    type: "int"
+    default_value: 1.0
+  outputs:
+  - help: For testing
+    human_name: Test integer
+    name: test_int
+    type: integer
+    optimal: true
+  outputs: []
