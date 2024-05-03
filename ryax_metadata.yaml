@@ -20,6 +20,3 @@ spec:
     human_name: Return
     name: ret
     type: "integer"
-  addons:
-    hpc: {}
-  outputs: []
