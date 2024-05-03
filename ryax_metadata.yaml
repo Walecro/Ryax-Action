@@ -15,6 +15,11 @@ spec:
     name: test
     type: "integer"
     default_value: 1
+  outputs:
+  - help: Return_Value
+    human_name: Return
+    name: ret
+    type: "integer"
   addons:
     hpc: {}
   outputs: []
