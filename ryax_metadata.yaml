@@ -9,11 +9,11 @@ spec:
   description: "Test"
   logo: "logo.jpg"
   categories:
-  - Action
-  - Custom 
+  - Action 
   inputs:
   - help: Test_Value_To_Print
     human_name: Test_Value_To_Print
     name: test
     type: "integer"
     default_value: 1.0
+  outputs: []
