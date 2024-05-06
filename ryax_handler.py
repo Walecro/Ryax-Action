@@ -4,5 +4,3 @@ def handle(mod_in):
     print("SUUUUUUH \n")
     return {"ret":2} 
 
-if __name__ == "__main__":
-    handle({})
