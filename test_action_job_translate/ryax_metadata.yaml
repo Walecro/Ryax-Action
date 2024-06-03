@@ -13,4 +13,9 @@ spec:
     human_name: script
     name: script
     type: "file"
+  outputs:
+  - help: job params
+    human_name: hpcparam
+    name: param
+    type: longstring
 

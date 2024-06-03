@@ -1,0 +1,41 @@
+#!/bin/bash     
+#SBATCH --comment "NMVar"
+#SBATCH -J "CH4"
+      
+#SBATCH --mail-user=michael.rey@univ-reims.fr
+##SBATCH --mail-type=ALL
+      
+#SBATCH --error=job.%J.err    
+#SBATCH --output=job.%J.out
+      
+#SBATCH -p short
+#SBATCH --time=24:00:00
+##     nombre de c�urs par blocs
+#SBATCH -c 28
+##     nombre de n�uds de calcul
+#SBATCH -N 1
+##    m�moire par n�ud, en Mo (ici, 20 Go)      
+#SBATCH --mem  90000
+##    source de l'environnement intel pour OpenMP      
+#source /apps/intel/bin/compilervars.sh intel64     
+##    chargement de l'environnement ROMEO
+#source /apps/tools/initBatch.sh
+
+##hostname
+
+JobId=$SLURM_JOBID
+TEMPDIR=/scratch_p/mrey/$JobId
+mkdir $TEMPDIR
+
+##cd $SLURM_SUBMIT_DIR
+
+cp /home/mrey/TENSOR/scr_ilp64/TENSORmain $TEMPDIR/
+cp Controle* $TEMPDIR/
+cp TENSOR_parameters.input $TEMPDIR/
+cp ../Para* $TEMPDIR/
+cd $TEMPDIR/
+
+
+
+## Execution
+./TENSORmain > Result_out.out
