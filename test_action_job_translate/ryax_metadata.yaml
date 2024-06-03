@@ -1,0 +1,16 @@
+apiVersion: "ryax.tech/v2.0"
+kind: Processor
+spec:
+  id: test
+  human_name: Custom_Action
+  type: python3
+  version: "1.3"
+  description: "Test"
+  categories:
+  - Action 
+  inputs:
+  - help: script .job
+    human_name: script
+    name: script
+    type: "file"
+
