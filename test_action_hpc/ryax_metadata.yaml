@@ -8,6 +8,6 @@ spec:
   description: "Test_hpc"
   categories:
   - HPC 
-    addons:
-        hpc: {}
+  addons:
+    hpc: {}
         
