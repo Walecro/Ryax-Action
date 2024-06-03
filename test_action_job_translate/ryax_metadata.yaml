@@ -1,11 +1,11 @@
 apiVersion: "ryax.tech/v2.0"
 kind: Processor
 spec:
-  id: test
-  human_name: Custom_Action
+  id: readjob
+  human_name: read_job
   type: python3
   version: "1.3"
-  description: "Test"
+  description: "read_job"
   categories:
   - Action 
   inputs:

@@ -1,7 +1,7 @@
 apiVersion: "ryax.tech/v2.0"
 kind: Processor
 spec:
-  id: test_hpc
+  id: testhpc
   human_name: Action_hpc
   type: python3
   version: "1.3"
