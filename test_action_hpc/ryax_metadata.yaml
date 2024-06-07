@@ -8,4 +8,9 @@ spec:
   description: "Test_hpc"
   categories:
   - HPC 
+  inputs: 
+    - help: .job to string
+    human_name: param
+    name: param
+    type: "longstring"
         
