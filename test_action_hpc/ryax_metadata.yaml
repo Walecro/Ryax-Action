@@ -9,7 +9,7 @@ spec:
   categories:
   - HPC 
   inputs: 
-    - help: .job to string
+  - help: .job to string
     human_name: param
     name: param
     type: "longstring"
