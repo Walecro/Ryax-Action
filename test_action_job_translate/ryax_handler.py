@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
 def handle(mod_in):
-    return ({"ret": mod_in.get("test") + 2})
 
+    with open(mod_in.get("script"), 'r') as file:
+        data = file.read().replace('\n', '')
+    return({"hpcparam":data})
