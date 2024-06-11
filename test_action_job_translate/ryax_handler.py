@@ -2,6 +2,4 @@
 
 def handle(mod_in):
 
-    with open(mod_in.get("script"), 'r') as file:
-        data = file.read().replace('\n', '')
-    return({"param":data})
+    return({"hpcparam":mod_in("exec")})
