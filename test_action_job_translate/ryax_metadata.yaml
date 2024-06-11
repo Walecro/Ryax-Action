@@ -2,19 +2,43 @@ apiVersion: "ryax.tech/v2.0"
 kind: Processor
 spec:
   id: readjob
-  human_name: read_job
+  human_name: Vérification des paramètres
   type: python3
-  version: "1.3"
-  description: "read_job"
+  version: "1.0"
+  description: "setup"
   categories:
   - Action 
   inputs:
-  - help: script .job
-    human_name: script
-    name: script
-    type: "file"
+  - help: Nombre de coeurs demandés 
+    human_name: cores
+    name: num_cores
+    type: "integer"
+  - help: Nombre de noeuds demandés
+    human_name: nodes
+    name: num_nodes
+    type: "integer"
+  - help: Temps maximum d'exécution en minutes
+    human_name: time
+    name: time
+    type: "integer"
+  - help: Chemin depuis le home ROMEO de l'exécutable
+    human_name: path
+    name: path_romeo
+    type: "string"
+  - help: Chemin depuis le home DGX de l'exécutable
+    human_name: path
+    name: path_DGX
+    type: "string"
+  - help: Nom de l'exécutable  
+    human_name: path
+    name: exec
+    type: "string"
+  - help: Nom du .out 
+    human_name: path
+    name: out
+    type: "string"
   outputs:
-  - help: job params
+  - help: liste params
     human_name: hpcparam
     name: param
     type: longstring
