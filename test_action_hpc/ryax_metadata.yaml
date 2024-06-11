@@ -21,6 +21,11 @@ spec:
     human_name: exec name
     name: exec
     type: "string"
+  outputs:
+  - help: execname
+    human_name: exec
+    name: exec
+    type: "string"
    
     
         
