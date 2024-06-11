@@ -9,8 +9,18 @@ spec:
   categories:
   - HPC 
   inputs: 
-  - help: .job to string
-    human_name: param
-    name: param
-    type: "longstring"
+  - help: sshname
+    human_name: name
+    name: sshname
+    type: "string"
+  - help: sship
+    human_name: ip
+    name: ip
+    type: "string"
+  - help: exec
+    human_name: exec name
+    name: exec
+    type: "string"
+   
+    
         
