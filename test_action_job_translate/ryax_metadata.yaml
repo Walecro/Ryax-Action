@@ -41,5 +41,5 @@ spec:
   - help: liste params
     human_name: hpcparam
     name: param
-    type: longstring
+    type: "string"
 
