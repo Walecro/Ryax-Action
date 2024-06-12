@@ -33,7 +33,7 @@ def handle(mod_in):
     except Exception as e:
         err = (f"Erreur : {e}")
 
-    return ({"output":open(output_file_path,"r"),"err":err})
+    return ({"output":open("/home/alabille/"+mod_in.get("outname"),"r"),"err":err})
 
 
 
