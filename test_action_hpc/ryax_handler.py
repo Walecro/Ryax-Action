@@ -37,7 +37,7 @@ def handle(mod_in):
     except Exception as e:
         print(f"Erreur : {e}")
 
-    return ({"output":open("/home/alabille/test.txt")})
+    return ({"output":open("/home/alabille/test.txt","r")})
 
 
 
