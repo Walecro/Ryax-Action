@@ -30,6 +30,10 @@ spec:
     human_name: output
     name: output
     type: "file"
+  - help: Code d'erreur
+    human_name: error
+    name: err
+    type: "string"
    
     
         
