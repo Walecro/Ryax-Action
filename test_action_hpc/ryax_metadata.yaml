@@ -21,11 +21,15 @@ spec:
     human_name: exec name
     name: exec
     type: "string"
-  outputs:
-  - help: execname
-    human_name: exec
-    name: exec
+  - help: Nom du fichier résultat
+    human_name: output_name + extension
+    name: outname
     type: "string"
+  outputs:
+  - help: Fichier résultat
+    human_name: output
+    name: output
+    type: "file"
    
     
         
