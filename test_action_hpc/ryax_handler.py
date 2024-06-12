@@ -14,12 +14,12 @@ def handle(mod_in):
 
     try:
         # Commande pour se connecter en SSH et exécuter le .exe
-        ssh_command_execute = f"ssh {username}@{hostname} '{remote_exe_path}'"
-        process_execute = subprocess.Popen(ssh_command_execute, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = process_execute.communicate()
+        #ssh_command_execute = f"ssh {username}@{hostname} '{remote_exe_path}'"
+        #process_execute = subprocess.Popen(ssh_command_execute, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        #stdout, stderr = process_execute.communicate()
 
-        if process_execute.returncode != 0:
-            err = (f"Erreur lors de l'exécution du .exe : {stderr.decode().strip()}")
+        #if process_execute.returncode != 0:
+        #    err = (f"Erreur lors de l'exécution du .exe : {stderr.decode().strip()}")
 
 
         # Commande pour récupérer le contenu du fichier de sortie
