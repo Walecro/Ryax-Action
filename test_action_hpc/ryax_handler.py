@@ -10,7 +10,7 @@ def handle(mod_in):
     err = ""
     # Fichier à exécuter et fichier à lire
     remote_exe_path = mod_in.get("exec")
-    output_file_path = "/home/alabille/"+mod_in.get("outname")+ " ."
+    output_file_path = "/home/alabille/"+mod_in.get("outname")+ " /home/alabille/rapat.txt"
 
     try:
         # Commande pour se connecter en SSH et exécuter le .exe
@@ -23,17 +23,17 @@ def handle(mod_in):
 
 
         # Commande pour récupérer le contenu du fichier de sortie
-        #ssh_command_scp = f"scp -i /home/alabille/.ssh/id_rsa.pub {username}@{hostname}:{output_file_path}"
-        #process_scp = subprocess.Popen(ssh_command_scp, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        #stdout, stderr = process_scp.communicate()
+        ssh_command_scp = f"scp {username}@{hostname}:{output_file_path}"
+        process_scp = subprocess.Popen(ssh_command_scp, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = process_scp.communicate()
 
-        #if process_scp.returncode != 0:
-        #    err = (f"Erreur lors de la lecture du fichier de sortie : {stderr.decode().strip()}")
-        #err = stdout
+        if process_scp.returncode != 0:
+            err = (f"Erreur lors de la lecture du fichier de sortie : {stderr.decode().strip()}")
+        err = stdout
     except Exception as e:
         err = (f"Erreur : {e}")
 
-    return ({"output":open("/home/alabille/"+mod_in.get("outname"),"r"),"err":err})
+    return ({"output":open("/home/alabille/rapat.txt","r"),"err":err})
 
 
 
