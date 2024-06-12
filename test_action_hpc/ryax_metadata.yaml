@@ -4,7 +4,7 @@ spec:
   id: testhpc
   human_name: Action_hpc
   type: python3
-  version: "1.3"
+  version: "1.4"
   description: "Test_hpc"
   categories:
   - HPC 
