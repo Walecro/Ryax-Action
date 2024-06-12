@@ -10,7 +10,7 @@ def handle(mod_in):
 
     # Fichier à exécuter et fichier à lire
     remote_exe_path = mod_in.get("exec")
-    output_file_path = "/home/alabille/"+mod_in.get("outname") +" /home/alabille/"+mod_in.get("outname")
+    output_file_path = "/home/alabille/"+mod_in.get("outname") 
 
     try:
         # Commande pour se connecter en SSH et exécuter le .exe
