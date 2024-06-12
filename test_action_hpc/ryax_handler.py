@@ -24,7 +24,7 @@ def handle(mod_in):
             print("Exécution du .exe réussie.")
 
         # Commande pour récupérer le contenu du fichier de sortie
-        ssh_command_scp = f"scp {username}@{hostname}:{output_file_path}"
+        ssh_command_scp = f"scp {username}@{hostname}:{output_file_path} {username}@10.22.3.99:{output_file_path}"
         process_scp = subprocess.Popen(ssh_command_scp, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process_scp.communicate()
 
@@ -32,7 +32,7 @@ def handle(mod_in):
             print(f"Erreur lors de la lecture du fichier de sortie : {stderr.decode().strip()}")
         else:
             print("Contenu du fichier de sortie :")
-            print(stdout.decode().strip())
+            print(open("./test.txt","r").read())
 
     except Exception as e:
         print(f"Erreur : {e}")
