@@ -23,13 +23,14 @@ def handle(mod_in):
 
 
         # Commande pour récupérer le contenu du fichier de sortie
-        ssh_command_scp = f"scp -i /home/alabille/.ssh/id_rsa.pub {username}@{hostname}:{output_file_path} {username}@10.22.3.99:{output_file_path}"
+        ssh_command_scp = "pwd"
+        # ssh_command_scp = f"scp -i /home/alabille/.ssh/id_rsa.pub {username}@{hostname}:{output_file_path} {username}@10.22.3.99:{output_file_path}"
         process_scp = subprocess.Popen(ssh_command_scp, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process_scp.communicate()
 
         if process_scp.returncode != 0:
             err = (f"Erreur lors de la lecture du fichier de sortie : {stderr.decode().strip()}")
-
+        err = stdout
     except Exception as e:
         err = (f"Erreur : {e}")
 
