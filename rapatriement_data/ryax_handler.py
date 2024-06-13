@@ -8,8 +8,7 @@ def handle(mod_in):
     hostname = mod_in.get("ip")
     username = mod_in.get("sshname")
     err = ""
-    out = ""
-    # Fichier à exécuter et fichier à lire
+     # Fichier à exécuter et fichier à lire
     remote_rsult_path = f"/home/{username}/{mod_in.get("outname")}"
 
     try:
