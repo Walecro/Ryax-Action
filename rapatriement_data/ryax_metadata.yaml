@@ -1,0 +1,31 @@
+apiVersion: "ryax.tech/v2.0"
+kind: Processor
+spec:
+  id: rapatdata
+  human_name: Récupération de données 
+  type: python3
+  version: "1.4"
+  description: "Récupération des données de sortie de calcul stockée dans un fichier sur la machine vers la vôtre "
+  categories:
+  - HPC 
+  inputs: 
+  - help: sshname
+    human_name: name
+    name: sshname
+    type: "string"
+  - help: sship
+    human_name: ip
+    name: ip
+    type: "string"
+  - help: Nom du fichier résultat
+    human_name: output_name + extension
+    name: outname
+    type: "string"
+  outputs:
+  - help: Code d'erreur
+    human_name: error
+    name: err
+    type: "string"
+   
+    
+        

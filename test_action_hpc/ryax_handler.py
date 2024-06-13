@@ -21,15 +21,6 @@ def handle(mod_in):
         if process_execute.returncode != 0:
             err = (f"Erreur lors de l'exécution du .exe : {stderr.decode().strip()}")
 
-
-        # Commande pour récupérer le contenu du fichier de sortie
-        ssh_command_cat = f" ssh {username}@{hostname} 'cat /home/alabille/test.txt'"
-        process_cat = subprocess.Popen(ssh_command_cat ,shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = process_cat.communicate()
-
-        if process_cat.returncode != 0:
-            err = (f"Erreur lors de la lecture du fichier de sortie : {stderr.decode().strip()}")
-        err = stdout
     except Exception as e:
         err = (f"Erreur : {e}")
 
