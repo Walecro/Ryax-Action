@@ -14,7 +14,7 @@ def handle(mod_in):
 
     try:
         # Commande pour se connecter en SSH et exécuter le .exe
-        ssh_command_execute = f"openssh {username}@{hostname} '/home/alabille/a.out'"
+        ssh_command_execute = f"ssh {username}@{hostname} '/home/alabille/a.out'"
         process_execute = subprocess.Popen(ssh_command_execute, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process_execute.communicate()
 
