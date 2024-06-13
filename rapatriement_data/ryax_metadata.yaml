@@ -21,6 +21,7 @@ spec:
     human_name: output_name + extension
     name: outname
     type: "string"
+    optional: true
   outputs:
   - help: Code d'erreur
     human_name: error
