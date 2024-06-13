@@ -26,10 +26,6 @@ spec:
     name: outname
     type: "string"
   outputs:
-  - help: Fichier résultat
-    human_name: output
-    name: output
-    type: "longstring"
   - help: Code d'erreur
     human_name: error
     name: err

@@ -5,12 +5,12 @@ import subprocess
 def handle(mod_in):
     
     # Détails de connexion SSH
-    hostname = "dgx1.univ-reims.fr"#mod_in.get("ip")
-    username = "alabille"#mod_in.get("sshname")
+    hostname = mod_in.get("ip")
+    username = mod_in.get("sshname")
     err = ""
+    out = ""
     # Fichier à exécuter et fichier à lire
-    remote_exe_path = "a.out" #mod_in.get("exec")
-    output_file_path = "/home/alabille/test.txt "+" alabille@10.22.3.99:/home/alabille/rapat.txt"
+    remote_exe_path = mod_in.get("exec")
 
     try:
         # Commande pour se connecter en SSH et exécuter le .exe
@@ -20,11 +20,13 @@ def handle(mod_in):
 
         if process_execute.returncode != 0:
             err = (f"Erreur lors de l'exécution du .exe : {stderr.decode().strip()}")
+        else:
+            out = "ok"
 
     except Exception as e:
         err = (f"Erreur : {e}")
 
-    return ({"output":stdout,"err":err})
+    return ({"output":out,"err":err})
 
 
 
