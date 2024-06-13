@@ -8,7 +8,7 @@ spec:
   description: "Récupération des données de sortie de calcul stockée dans un fichier sur la machine vers la vôtre "
   categories:
   - HPC 
-  depedencies:
+  dependencies:
     - openssh
   inputs: 
   - help: sshname
