@@ -7,7 +7,9 @@ spec:
   version: "1.4"
   description: "Test_hpc"
   categories:
-  - HPC 
+  - HPC
+  depedencies:
+    - openssh
   inputs: 
   - help: sshname
     human_name: name
