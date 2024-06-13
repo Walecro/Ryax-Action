@@ -14,7 +14,7 @@ def handle(mod_in):
 
     try:
         # Commande pour se connecter en SSH et exécuter le .exe
-        ssh_command_execute = f"ssh {username}@{hostname} '{remote_exe_path}' \n"
+        ssh_command_execute = f"ssh {username}@{hostname} '{remote_exe_path}'"
         process_execute = subprocess.Popen(ssh_command_execute, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process_execute.communicate()
 
@@ -23,17 +23,17 @@ def handle(mod_in):
 
 
         # Commande pour récupérer le contenu du fichier de sortie
-        #ssh_command_scp = "scp alabille@dgx1.univ-reims.fr:/home/alabille/test.txt alabille@10.22.3.99:/home/alabille/ "
-        #process_scp = subprocess.Popen(ssh_command_scp ,shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        #stdout, stderr = process_scp.communicate()
+        ssh_command_cat = f" ssh {username}@{hostname} 'cat /home/alabille/test.txt'"
+        process_cat = subprocess.Popen(ssh_command_cat ,shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = process_cat.communicate()
 
-        #if process_scp.returncode != 0:
-        #    err = (f"Erreur lors de la lecture du fichier de sortie : {stderr.decode().strip()}")
-        #err = stdout
+        if process_cat.returncode != 0:
+            err = (f"Erreur lors de la lecture du fichier de sortie : {stderr.decode().strip()}")
+        err = stdout
     except Exception as e:
         err = (f"Erreur : {e}")
 
-    return ({"output":"/home/alabille/test.txt","err":err})
+    return ({"output":stdout,"err":err})
 
 
 
