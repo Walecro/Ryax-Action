@@ -15,7 +15,7 @@ def handle(mod_in):
 
     try:
         # Commande pour se connecter en SSH et exécuter le .exe
-        ssh_command_execute = f"/bin/scp {username}@{hostname}:{remote_rsult_path} {username}@10.22.3.99:/home/{hostname}/{remote_rsult_path}"
+        ssh_command_execute = f"/bin/scp {username}@{hostname}:{remote_rsult_path} {username}@10.22.3.99:/home/{username}/{remote_rsult_path}"
         process_execute = subprocess.Popen(ssh_command_execute, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process_execute.communicate()
 
