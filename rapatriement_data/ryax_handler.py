@@ -7,9 +7,11 @@ def handle(mod_in):
     # Détails de connexion SSH
     hostname = mod_in.get("ip")
     username = mod_in.get("sshname")
+    out_name = mod_in.get("outname")
+
     err = ""
      # Fichier à exécuter et fichier à lire
-    remote_rsult_path = f"/home/{username}/{mod_in.get("outname")}"
+    remote_rsult_path = f"/home/{username}/{out_name}"
 
     try:
         # Commande pour se connecter en SSH et exécuter le .exe
