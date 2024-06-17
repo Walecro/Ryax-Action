@@ -1,0 +1,43 @@
+apiVersion: "ryax.tech/v2.0"
+kind: Processor
+spec:
+  id: dgx
+  human_name: Dgx
+  type: python3
+  version: "1.5"
+  description: "Offloading sur Dgx"
+  categories:
+  - HPC
+  - help: Private key file content.
+    human_name: ssh_pkey
+    name: ssh_pkey
+    type: file
+  - help: Username.
+    human_name: ssh_user
+    name: ssh_user
+    type: string
+  - help: Remote host.
+    human_name: ssh_host
+    name: ssh_host
+    type: string
+  - help: Ssh port.
+    human_name: ssh_port
+    name: ssh_port
+    type: integer
+  - help: command to run.
+    human_name: ssh_cmd
+    name: ssh_cmd
+    type: longstring
+  outputs:
+  - help: stdout ssh from command.
+    human_name: stdout
+    name: stdout
+    type: longstring
+  - help: stderr ssh from command.
+    human_name: stderr
+    name: stderr
+    type: longstring
+
+   
+    
+        
