@@ -11,14 +11,6 @@ spec:
   addons:
     hpc: {}
   inputs: 
-  - help: sshname
-    human_name: name
-    name: sshname
-    type: "string"
-  - help: sship
-    human_name: ip
-    name: ip
-    type: "string"
   - help: exec
     human_name: exec name
     name: exec
