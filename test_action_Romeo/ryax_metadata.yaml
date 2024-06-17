@@ -8,6 +8,8 @@ spec:
   description: "Offloading sur Romeo"
   categories:
   - HPC
+  dependencies:
+  - openssh
   addons:
     hpc: {}
   inputs: 
