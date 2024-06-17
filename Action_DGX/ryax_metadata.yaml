@@ -8,6 +8,7 @@ spec:
   description: "Offloading sur Dgx"
   categories:
   - HPC
+  inputs:
   - help: Private key file content.
     human_name: ssh_pkey
     name: ssh_pkey
