@@ -1,0 +1,37 @@
+apiVersion: "ryax.tech/v2.0"
+kind: Processor
+spec:
+  id: romeoaction
+  human_name: romeo
+  type: python3
+  version: "1.4"
+  description: "Offloading sur Romeo"
+  categories:
+  - HPC
+  addons:
+    hpc: {}
+  inputs: 
+  - help: sshname
+    human_name: name
+    name: sshname
+    type: "string"
+  - help: sship
+    human_name: ip
+    name: ip
+    type: "string"
+  - help: exec
+    human_name: exec name
+    name: exec
+    type: "string"
+  - help: Nom du fichier résultat
+    human_name: output_name + extension
+    name: outname
+    type: "string"
+  outputs:
+  - help: Code d'erreur
+    human_name: error
+    name: err
+    type: "string"
+   
+    
+        
