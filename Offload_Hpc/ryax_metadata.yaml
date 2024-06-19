@@ -1,0 +1,33 @@
+apiVersion: "ryax.tech/v2.0"
+kind: Processor
+spec:
+  id: offload
+  human_name: Calcul 
+  type: python3
+  version: "1.0"
+  description: "Exécution sur machine adéquate et disponible"
+  categories:
+  - Action 
+  inputs:
+  - help: Nombre de coeurs demandés 
+    human_name: cores
+    name: num_cores
+    type: "integer"
+  - help: Nombre de noeuds demandés
+    human_name: nodes
+    name: num_nodes
+    type: "integer"
+  - help: Temps maximum d'exécution en minutes
+    human_name: time
+    name: time
+    type: "integer"
+  - help: Chemin depuis le home de l'exécutable
+    human_name: path
+    name: path
+    type: "string"
+  - help: Nom de l'exécutable  
+    human_name: path
+    name: exec
+    type: "string"
+
+
