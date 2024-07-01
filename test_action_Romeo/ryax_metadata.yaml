@@ -8,18 +8,26 @@ spec:
   description: "Offloading sur Romeo"
   categories:
   - HPC
-  dependencies:
-  - openssh
-  addons:
-    hpc: {}
   inputs: 
+  - help: Private key file content.
+    human_name: ssh_pkey
+    name: ssh_pkey
+    type: file
+  - help: Username.
+    human_name: ssh_user
+    name: ssh_user
+    type: string
+  - help: Remote host.
+    human_name: ssh_host
+    name: ssh_host
+    type: string
+  - help: Ssh port.
+    human_name: ssh_port
+    name: ssh_port
+    type: integer
   - help: exec
     human_name: exec name
     name: exec
-    type: "string"
-  - help: Nom du fichier résultat
-    human_name: output_name + extension
-    name: outname
     type: "string"
   outputs:
   - help: Code d'erreur
