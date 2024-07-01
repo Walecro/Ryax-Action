@@ -9,25 +9,41 @@ spec:
   categories:
   - HPC
   inputs: 
-  - help: Private key file content.
+  - help: Clé privée ssh RSA.
     human_name: ssh_pkey
     name: ssh_pkey
     type: file
-  - help: Username.
+  - help: Nom d'utilisateur
     human_name: ssh_user
     name: ssh_user
     type: string
-  - help: Remote host.
+  - help: Remote host. (à retirer)
     human_name: ssh_host
     name: ssh_host
     type: string
-  - help: Ssh port.
+  - help: Ssh port (22).
     human_name: ssh_port
     name: ssh_port
     type: integer
-  - help: exec
+  - help: Nom de l'executable
     human_name: exec name
     name: exec
+    type: "string"
+  - help: Time nécessaire maximum pour le calcul, format jj:hh:mm:ss
+    human_name: Temps
+    name: time
+    type: "string"
+  - help: Nombre de noeuds demandés
+    human_name: nodes
+    name: nodes
+    type: integer
+  - help: Nombre de coeurs demandés 
+    human_name: cores
+    name: num_cores
+    type: "integer"
+  - help : Nom du fichier résultat
+    human_name : output_name
+    name: out_names
     type: "string"
   outputs:
   - help: Code d'erreur
