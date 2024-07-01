@@ -15,7 +15,7 @@ def handle(mod_in):
             username=mod_in.get("ssh_user"),
             pkey=pkey,
         )
-        stdin, stdout, stderr = client.exec_command("cat")
+        stdin, stdout, stderr = client.exec_command("ls -a")
     except Exception as e:
         print(
             f"Unexpected exception during bulk upload: {e}"
