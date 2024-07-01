@@ -15,11 +15,15 @@ def handle(mod_in):
         username=mod_in.get("ssh_user"),
         pkey=pkey,
     )
-    stdin, stdout, stderr = client.exec_command('echo "#!/bin/bash\n#SBATCH --time=00:01:00\n#SBATCH --nodes=2 \nsrun ls -a" >batch.sh')
-    stdin, stdout, stderr = client.exec_command('sbatch batch.sh > output.out')
+    ###
+    # stdin, stdout, stderr = client.exec_command('echo "#!/bin/bash\n#SBATCH --time=00:01:00\n#SBATCH --nodes=2 \nsrun ls -a" >batch.sh')
+    # for line in stderr.readlines():
+       # err += line
+
+    #stdin, stdout, stderr = client.exec_command('sbatch batch.sh > output.out')
     client.close()
 
-    for line in stderr.readlines():
-        err += line
+    #for line in stderr.readlines():
+        #err += line
 
-    return({"err":str(err)})
+    return({"err":"osekour"})
