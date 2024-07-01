@@ -5,7 +5,7 @@ import paramiko
 def handle(mod_in):
     
     pkey = paramiko.RSAKey.from_private_key_file(mod_in.get("ssh_pkey"))
-
+    err = ""
     try:
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -18,7 +18,7 @@ def handle(mod_in):
         stdin, stdout, stderr = client.exec_command("ls -a")
     except Exception as e:
         print(
-            f"Unexpected exception during bulk upload: {e}"
+            err = f"Unexpected exception during bulk upload: {e}"
         )
     finally:
         client.close()
@@ -29,4 +29,4 @@ def handle(mod_in):
     for line in stdout:
         stdout_output += line
 
-    return({"err":str(stdout_output)})
+    return({"err":str(err)})
