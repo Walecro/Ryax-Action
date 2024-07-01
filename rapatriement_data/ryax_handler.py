@@ -1,39 +1,49 @@
-#!/usr/bin/env python3
+import json
+import paramiko
+from scp import SCPClient
 
-import subprocess
- 
-def handle(mod_in):
-    
-    # Détails de connexion SSH
-    hostname = mod_in.get("ip")
-    username = mod_in.get("sshname")
-    out_name = mod_in.get("outname")
 
-    err = ""
-     # Fichier à exécuter et fichier à lire
-    remote_rsult_path = f"/home/{username}/{out_name}"
+def handle(input_values: dict) -> None:
+    print("Creating ssh key from file...")
+    pkey = paramiko.RSAKey.from_private_key_file(input_values.get("ssh_pkey"))
 
     try:
-        # Commande pour se connecter en SSH et exécuter le .exe
-        ssh_command_execute = f"/bin/scp {username}@{hostname}:{remote_rsult_path} {username}@10.22.3.99:/home/{username}/{remote_rsult_path}"
-        process_execute = subprocess.Popen(ssh_command_execute, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = process_execute.communicate()
-
-        if process_execute.returncode != 0:
-            err = (f"Erreur lors de la récupération : {stderr.decode().strip()}")
-        else:
-            err = "ok"
-
+        client = paramiko.SSHClient()
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        client.connect(
+            input_values.get("ssh_host"),
+            input_values.get("ssh_port"),
+            username=input_values.get("ssh_user"),
+            pkey=pkey,
+        )
+        scp = SCPClient(client.get_transport())
+        print(f"Uploading file {input_values.get('input_file')} to {input_values.get('ssh_user')}@{input_values.get('ssh_host')}:{input_values.get('remote_location')}")
+        scp.put(
+            input_values.get("input_file"),
+            remote_path=input_values.get("remote_location"),
+        )
     except Exception as e:
-        err = (f"Erreur : {e}")
-
-    return ({"err":err})
-
-
-
-
+        print(
+            f"Unexpected exception during bulk upload: {e}"
+        )
+    finally:
+        client.close()
 
 
 
- 
+if __name__ == "__main__":
+    input_json = {
+        "ssh_pkey": "secret",
+        "ssh_user": "secret",
+        "ssh_host": "secret",
+        "ssh_port": "secret",
+        "input_file": "./test.txt",
+        "remote_location": "test.txt",
+    }
+    with open("../secrets.txt") as f:
+        secrets = json.load(f)
+        for key in secrets:
+            if key in input_json:
+                input_json[key] = secrets[key]
 
+    handle(input_json)

@@ -8,8 +8,6 @@ spec:
   description: "Récupération des données de sortie de calcul stockée dans un fichier sur la machine vers la vôtre "
   categories:
   - HPC 
-  dependencies:
-    - openssh
   inputs: 
   - help: sshname
     human_name: name
@@ -19,9 +17,13 @@ spec:
     human_name: ip
     name: ip
     type: "string"
-  - help: Nom du fichier résultat
+  - help: Path du fichier résultat
     human_name: output_name + extension
-    name: outname
+    name: outname_on_host
+    type: "string"
+  - help: Path du fichier résultat sur votre machine (optional)
+    human_name: output_name + extension
+    name: outname_home
     type: "string"
     optional: true
   outputs:

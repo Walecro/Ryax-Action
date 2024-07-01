@@ -37,13 +37,3 @@ def handle(input_values : dict) -> None:
     client.close()
 
     return { "stdout": str(stdout_output), "stderr": str(stderr_output)}
-
-
-
-
-
-
-
-
- 
-
