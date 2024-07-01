@@ -24,9 +24,4 @@ def handle(mod_in):
         client.close()
 
 
-    stdout_output = ""
-    stdout = stdout.readlines() if stdout else []    
-    for line in stdout:
-        stdout_output += line
-
-    return({"err":str(err)})
+    return({"err":"test"})
