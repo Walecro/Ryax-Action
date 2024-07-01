@@ -15,15 +15,15 @@ def handle(mod_in):
         pkey=pkey,
     )
     
-    ###
-    # stdin, stdout, stderr = client.exec_command('echo "#!/bin/bash\n#SBATCH --time=00:01:00\n#SBATCH --nodes=2 \nsrun ls -a" >batch.sh')
-    # for line in stderr.readlines():
-       # err += line
+    
+    stdin, stdout, stderr = client.exec_command('echo "#!/bin/bash\n#SBATCH --time=00:01:00\n#SBATCH --nodes=2 \nsrun ls -a" >batch.sh')
+    for line in stderr.readlines():
+       err += line
 
-    #stdin, stdout, stderr = client.exec_command('sbatch batch.sh > output.out')
+    stdin, stdout, stderr = client.exec_command('sbatch batch.sh > output.out')
+    for line in stderr.readlines():
+        err += line
     client.close()
 
-    #for line in stderr.readlines():
-        #err += line
 
     return({"err":"osekour"})
