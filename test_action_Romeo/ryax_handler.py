@@ -25,8 +25,8 @@ def handle(mod_in):
 
 
     stdout_output = ""
-    stdout.readlines()
+    stdout = stdout.readlines() if stdout else []    
     for line in stdout:
         stdout_output += line
 
-    return({"err":stdout_output})
+    return({"err":str(stdout_output)})
