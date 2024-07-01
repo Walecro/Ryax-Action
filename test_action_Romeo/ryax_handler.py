@@ -17,11 +17,9 @@ def handle(mod_in):
         )
         stdin, stdout, stderr = client.exec_command("ls -a")
     except Exception as e:
-        print(
-            err = f"Unexpected exception during bulk upload: {e}"
-        )
+        err = f"Unexpected exception during bulk upload: {e}"
     finally:
         client.close()
 
 
-    return({"err":"test"})
+    return({"err":str(err)})

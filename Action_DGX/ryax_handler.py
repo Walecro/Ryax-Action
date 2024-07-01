@@ -9,14 +9,21 @@ def handle(input_values : dict) -> None:
     print("Creating ssh key from file...")
     pkey = paramiko.RSAKey.from_private_key_file(input_values.get("ssh_pkey"))
 
-    client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(
-        input_values.get("ssh_host"),
-        input_values.get("ssh_port"),
-        username=input_values.get("ssh_user"),
-        pkey=pkey,
-    )
+    try: 
+        client = paramiko.SSHClient()
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        client.connect(
+            input_values.get("ssh_host"),
+            input_values.get("ssh_port"),
+            username=input_values.get("ssh_user"),
+            pkey=pkey,
+        )
+    except Exception as e:
+        err = f"Unexpected exception during bulk upload: {e}"
+        return { "stdout": "", "stderr": str(err)}
+    finally:
+        client.close()
+    
     print(f"Executing command '{cmd}'")
     stdin, stdout, stderr = client.exec_command(cmd)
 
