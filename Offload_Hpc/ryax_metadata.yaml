@@ -21,14 +21,17 @@ spec:
     human_name: Temps
     name: time
     type: "string"
+    default_value: "00:10:00"
   - help: Nombre de noeuds demandés
     human_name: nodes
     name: nodes
     type: integer
+    default_value: 1
   - help: Nombre de coeurs demandés 
     human_name: cores
     name: num_cores
     type: "integer"
+    default_value: 1
   - help: Type de ressource demandée 
     human_name: cpu_or_gpu
     name: resource
