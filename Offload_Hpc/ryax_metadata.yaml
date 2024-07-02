@@ -1,11 +1,11 @@
 apiVersion: "ryax.tech/v2.0"
 kind: Processor
 spec:
-  id: aiguilage
-  human_name: Vérification des paramètres [1]
+  id: calcul
+  human_name: Déploiement de calculs
   type: python3
   version: "1.0"
-  description: "Aiguillage sur la ressource adéquate selon les paramètres"
+  description: "Déploiement de vos calculs sur une machine adéquate"
   categories:
   - HPC
   inputs: 
@@ -41,6 +41,10 @@ spec:
   - help: Error(s)
     human_name: Code(s) d'erreur
     name: err
+    type: "string"
+  - help: Ressources
+    human_name: Ressources dispo
+    name: res_DEBUG
     type: "string"
    
     
