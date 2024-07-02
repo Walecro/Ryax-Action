@@ -12,6 +12,8 @@ def handle(mod_in):
     cmddgx = "nvidia-smi"
     cmdjuliet = ""
 
+    #Remplacer par un dict ? clé = nom ? 
+
     list_server_ok = [["dgx1.univ-reims.fr",1],["romeologin1.univ-reims.fr",1],["romeologin2.univ-reims.fr",1]]
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -33,8 +35,9 @@ def handle(mod_in):
         
         client.close()
 
-    #Si les deux noeuds de login de romeo sont dispos pas besoin du 2eme
-    list_server_ok.pop()
+    #Si les deux noeuds de login de romeo sont au même état pas besoin du 2eme
+    if(list_server_ok[1][1] == list_server_ok[2][1]):
+        list_server_ok.pop()
 
     #Questionnement sur les ressources disponibles
     for server_and_ok in list_server_ok:
@@ -47,16 +50,15 @@ def handle(mod_in):
         )
         if "romeo" in server_and_ok[0]:
             r_stdin, r_stdout, r_stderr = client.exec_command(cmdromeo)
+            r_out = r_stdout.readlines()
+
         elif "dgx" in server_and_ok[0]:
             d_stdin, d_stdout, d_stderr = client.exec_command(cmddgx)
+            d_out = d_stdout.readlines()
+
 
         client.close()
 
-    
-
-    r_out = r_stdout.readlines()
-    d_out = d_stdout.readlines()
-    
     ret = r_out + d_out    
 
-    return({"err":"osekour","res_DEBUG":str(ret)})
+    return({"err":"osekour","res_DEBUG":ret})
