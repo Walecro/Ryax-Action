@@ -1,33 +1,47 @@
 apiVersion: "ryax.tech/v2.0"
 kind: Processor
 spec:
-  id: offload
-  human_name: Calcul 
+  id: aiguilage
+  human_name: Vérification des paramètres [1]
   type: python3
   version: "1.0"
-  description: "Exécution sur machine adéquate et disponible"
+  description: "Aiguillage sur la ressource adéquate selon les paramètres"
   categories:
-  - Action 
-  inputs:
+  - HPC
+  inputs: 
+  - help: Clé privée ssh RSA.
+    human_name: ssh_pkey
+    name: ssh_pkey
+    type: file
+  - help: Nom d'utilisateur
+    human_name: ssh_user
+    name: ssh_user
+    type: string
+  - help: Time nécessaire maximum pour le calcul, format jj:hh:mm:ss
+    human_name: Temps
+    name: time
+    type: "string"
+  - help: Nombre de noeuds demandés
+    human_name: nodes
+    name: nodes
+    type: integer
   - help: Nombre de coeurs demandés 
     human_name: cores
     name: num_cores
     type: "integer"
-  - help: Nombre de noeuds demandés
-    human_name: nodes
-    name: num_nodes
-    type: "integer"
-  - help: Temps maximum d'exécution en minutes
-    human_name: time
-    name: time
-    type: "integer"
-  - help: Chemin depuis le home de l'exécutable
-    human_name: path
-    name: path
+  - help: Type de ressource demandée 
+    human_name: cpu_or_gpu
+    name: resource
+    type: enum
+    enum_values:
+      - cpu
+      - gpu
+    default_value: cpu
+  outputs:
+  - help: Error(s)
+    human_name: Code(s) d'erreur
+    name: err
     type: "string"
-  - help: Nom de l'exécutable  
-    human_name: path
-    name: exec
-    type: "string"
-
-
+   
+    
+        

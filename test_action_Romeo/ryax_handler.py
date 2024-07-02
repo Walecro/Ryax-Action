@@ -15,7 +15,7 @@ def handle(mod_in):
         pkey=pkey,
     )
     
-    cmd = f'echo "#!/bin/bash\n#SBATCH --time={mod_in.get("time")}\n#SBATCH --nodes={mod_in.get("nodes")} \n#SBATCH --output={mod_in.get("out_name")}\nsrun ls -a" >batch.sh''
+    cmd = f'echo "#!/bin/bash\n#SBATCH --time={mod_in.get("time")}\n#SBATCH -p={mod_in.get("partition")}\n#SBATCH --nodes={mod_in.get("nodes")} \n#SBATCH --output={mod_in.get("out_name")}\nsrun ls -a" >batch.sh''
     stdin, stdout, stderr = client.exec_command(cmd)
     for line in stderr.readlines():
        err += line

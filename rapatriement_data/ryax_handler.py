@@ -30,20 +30,3 @@ def handle(input_values: dict) -> None:
         client.close()
 
 
-
-if __name__ == "__main__":
-    input_json = {
-        "ssh_pkey": "secret",
-        "ssh_user": "secret",
-        "ssh_host": "secret",
-        "ssh_port": "secret",
-        "input_file": "./test.txt",
-        "remote_location": "test.txt",
-    }
-    with open("../secrets.txt") as f:
-        secrets = json.load(f)
-        for key in secrets:
-            if key in input_json:
-                input_json[key] = secrets[key]
-
-    handle(input_json)
