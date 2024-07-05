@@ -77,6 +77,7 @@ def handle(mod_in):
     else:
         ret = "Pas de ressource"
 
-    err = r_stderr + d_stderr
 
-    return({"err":err,"res_DEBUG":ret})
+    err = r_stderr.readlines() + d_stderr.readlines()
+
+    return({"err":"osef","res_DEBUG":ret})
