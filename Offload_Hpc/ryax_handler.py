@@ -79,4 +79,4 @@ def handle(mod_in):
 
     err = r_stderr + d_stderr
 
-    return({"err":e,"res_DEBUG":ret})
+    return({"err":err,"res_DEBUG":ret})
