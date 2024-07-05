@@ -10,10 +10,11 @@ def handle(mod_in):
     #On récup les noeuds libres 
     cmdromeo = 'sinfo -h | grep idle'
     cmddgx = "nvidia-smi"
-    cmdjuliet = ""
+    cmdexecromeo = f'echo "#!/bin/bash\n#SBATCH --time={mod_in.get("time")}\n#SBATCH -p={mod_in.get("partition")}\n#SBATCH --nodes={mod_in.get("nodes")} \n#SBATCH --output={mod_in.get("out_name")}\nsrun {mod_in.get("exec")}" >batch.sh'
+    cmdexecdgx = "nvidia-docker exec" 
 
     #Remplacer par un dict ? clé = nom ? 
-
+    #Serait bien d'avoir un service externe à ping pour avoir la liste si c'est mis à jour 
     list_server_ok = [["dgx1.univ-reims.fr",1],["romeologin1.univ-reims.fr",1],["romeologin2.univ-reims.fr",1]]
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -59,6 +60,7 @@ def handle(mod_in):
 
         client.close()
 
-    ret = r_out + d_out    
+    ret = r_out + d_out
+    err = r_stderr + d_stderr
 
-    return({"err":"osekour","res_DEBUG":ret})
+    return({"err":e,"res_DEBUG":ret})

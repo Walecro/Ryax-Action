@@ -17,20 +17,24 @@ spec:
     human_name: ip
     name: ip
     type: "string"
-  - help: Path du fichier résultat
+  - help: Path du fichier résultat sur la machine de calcul
     human_name: output_name + extension
-    name: outname_on_host
+    name: remote_location
     type: "string"
-  - help: Path du fichier résultat sur votre machine (optional)
+  - help: Path du fichier résultat sur votre machine 
     human_name: output_name + extension
-    name: outname_home
+    name: remote_location
     type: "string"
-    optional: true
   outputs:
   - help: Code d'erreur
     human_name: error
     name: err
     type: "string"
+  - help: Sortie
+    human_name: Sortie
+    name: out
+    type: "string"
+
    
     
         

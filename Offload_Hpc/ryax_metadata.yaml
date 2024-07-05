@@ -40,6 +40,10 @@ spec:
       - cpu
       - gpu
     default_value: cpu
+  - help: Nom de l'exécutable +  arguments necéssaires
+    human_name: Nom du programme
+    name: exec
+    type: "string"
   outputs:
   - help: Error(s)
     human_name: Code(s) d'erreur
