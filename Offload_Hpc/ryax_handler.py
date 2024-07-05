@@ -61,11 +61,19 @@ def handle(mod_in):
 
         client.close()
 
-    res_avail = r_out[0].split()[3]
+    if(r_out):
+        res_avail_romeo = r_out[0].split()[3]
 
-    if(res_avail >= mod_in.get("nodes")):
-        ret = "Assez de ressource"
+    res_avail_dgx = 0
+    
 
+    if(int(res_avail_romeo) >= mod_in.get("nodes")):
+        ret = "Assez de ressource Romeo"
+    elif(res_avail_dgx >= mod_in.get("nodes")):
+        ret = "Assez de ressource DGX"
+    else:
+        ret = "Pas de ressource"
+        
     err = r_stderr + d_stderr
 
     return({"err":e,"res_DEBUG":ret})

@@ -59,6 +59,10 @@ def main():
         client.close()
     
     
-    print(r_out[0].split()[3])
+    if(r_out):
+        res_avail = r_out[0].split()[3]
+
+    if(int(res_avail) >= 1):
+        print("Assez de ressource")
 
 main()
