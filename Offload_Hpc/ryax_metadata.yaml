@@ -44,6 +44,10 @@ spec:
     human_name: Nom du programme
     name: exec
     type: "string"
+  - help: Nom du fichier de sortie 
+    human_name: name_file
+    name: name_file
+    type: "string"
   outputs:
   - help: Error(s)
     human_name: Code(s) d'erreur
