@@ -8,7 +8,7 @@ def main():
     err = ""
 
     #On récup les noeuds libres 
-    cmdromeo = 'sinfo -h | grep idle'
+    cmdromeo = 'sinfo -h | grep idle | grep -w gpu'
     cmddgx = "nvidia-smi"
     cmdjuliet = ""
 
@@ -58,7 +58,7 @@ def main():
 
         client.close()
     
-
-    print(r_out,d_out)
+    
+    print(r_out[0].split()[3])
 
 main()

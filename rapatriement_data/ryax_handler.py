@@ -16,11 +16,12 @@ def handle(input_values: dict) -> None:
             pkey=pkey,
         )
         scp = SCPClient(client.get_transport())
-        out = f"Uploading file {input_values.get('input_file')} to {input_values.get('ssh_user')}@{input_values.get('ssh_host')}:{input_values.get('remote_location')}"
         scp.put(
-            input_values.get("input_file"),
+            input_values.get("remote_location"),
             remote_path=input_values.get("remote_location"),
         )
+        out = f"Uploaded file {input_values.get('remote_location')} to {input_values.get('ssh_user')}@{input_values.get('ssh_host')}:{input_values.get('remote_location')}"
+
     except Exception as e:
         
             err= f"Unexpected exception during bulk upload: {e}"

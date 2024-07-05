@@ -8,9 +8,11 @@ def handle(mod_in):
     err = ""
 
     #On récup les noeuds libres 
-    cmdromeo = 'sinfo -h | grep idle'
+    cmdromeo = f'sinfo -h | grep idle | grep -w {mod_in.get("resource")}'
     cmddgx = "nvidia-smi"
-    cmdexecromeo = f'echo "#!/bin/bash\n#SBATCH --time={mod_in.get("time")}\n#SBATCH -p={mod_in.get("partition")}\n#SBATCH --nodes={mod_in.get("nodes")} \n#SBATCH --output={mod_in.get("out_name")}\nsrun {mod_in.get("exec")}" >batch.sh'
+    cmdsbatchromeo = f'echo "#!/bin/bash\n#SBATCH --time={mod_in.get("time")}\n#SBATCH -p={mod_in.get("partition")}\n#SBATCH --nodes={mod_in.get("nodes")} \n#SBATCH --output={mod_in.get("out_name")}\nsrun {mod_in.get("exec")}" >batch.sh'
+    cmdexecromeo = 'sbatch batch.sh > output.out'
+
     cmdexecdgx = "nvidia-docker exec" 
 
     #Remplacer par un dict ? clé = nom ? 
@@ -57,10 +59,13 @@ def handle(mod_in):
             d_stdin, d_stdout, d_stderr = client.exec_command(cmddgx)
             d_out = d_stdout.readlines()
 
-
         client.close()
 
-    ret = r_out + d_out
+    res_avail = r_out[0].split()[3]
+
+    if(res_avail >= mod_in.get("nodes")):
+        ret = "Assez de ressource"
+
     err = r_stderr + d_stderr
 
     return({"err":e,"res_DEBUG":ret})

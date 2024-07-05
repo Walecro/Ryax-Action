@@ -21,7 +21,7 @@ spec:
       - dgx1.univ-reims.fr
       - romeologin1.univ-reims.fr
       - romeologin2.univ-reims.fr
-  - help: Path du fichier résultat sur la machine de calcul
+  - help: Path du fichier résultat sur la machine de calcul, depuis votre home
     human_name: output_name + extension
     name: remote_location
     type: "string"
