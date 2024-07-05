@@ -16,14 +16,18 @@ spec:
   - help: sship
     human_name: ip
     name: ip
-    type: "string"
+    type: "enum"
+    enum_values: 
+      - dgx1.univ-reims.fr
+      - romeologin1.univ-reims.fr
+      - romeologin2.univ-reims.fr
   - help: Path du fichier résultat sur la machine de calcul
     human_name: output_name + extension
     name: remote_location
     type: "string"
   - help: Path du fichier résultat sur votre machine 
     human_name: output_name + extension
-    name: remote_location
+    name: home_location
     type: "string"
   outputs:
   - help: Code d'erreur
