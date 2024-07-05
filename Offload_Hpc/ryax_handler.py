@@ -10,7 +10,7 @@ def handle(mod_in):
     #On récup les noeuds libres 
     cmdromeo = f'sinfo -h | grep idle | grep -w {mod_in.get("resource")}'
     cmddgx = "nvidia-smi"
-    cmdsbatchromeo = f'echo "#!/bin/bash\n#SBATCH --time={mod_in.get("time")}\n#SBATCH --nodes={mod_in.get("nodes")} \n#SBATCH --output={mod_in.get("name_file")}\nsrun {mod_in.get("exec")}" > batch.sh'
+    #cmdsbatchromeo = f'echo "#!/bin/bash\n#SBATCH --time={mod_in.get("time")}\n#SBATCH --nodes={mod_in.get("nodes")} \n#SBATCH --output={mod_in.get("name_file")}\nsrun {mod_in.get("exec")}" > batch.sh'
     cmdexecromeo = 'sbatch batch.sh > output.out'
 
     cmdexecdgx = "nvidia-docker exec" 
@@ -61,13 +61,16 @@ def handle(mod_in):
 
         client.close()
 
-    if(r_out):
-        res_avail_romeo = r_out[0].split()[3]
-
+    res_avail_romeo = 0 
     res_avail_dgx = 0
+
+    if(r_out):
+        res_avail_romeo = int(r_out[0].split()[3])
+
+    
     
 
-    if(int(res_avail_romeo) >= mod_in.get("nodes")):
+    if(res_avail_romeo >= mod_in.get("nodes")):
         ret = "Assez de ressource Romeo"
     elif(res_avail_dgx >= mod_in.get("nodes")):
         ret = "Assez de ressource DGX"
