@@ -14,7 +14,7 @@ def handle(mod_in):
     cmdexecromeo = 'sbatch batch.sh '
 
     #Cela ne convient pas au système en place sur la DGX, mais actuellement j'ai pas les droits alors on va dire que
-    cmdexecdgx = f"make && ./{mod_in.get("exec")} > {mod_in.get("name_file")}" 
+    cmdexecdgx = f'make && ./{mod_in.get("exec")} > {mod_in.get("name_file")}' 
 
     #Remplacer par un dict ? clé = nom ? 
     #Serait bien d'avoir un service externe à ping pour avoir la liste si c'est mis à jour 
