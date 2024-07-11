@@ -44,7 +44,7 @@ def main():
     print(list_server_ok)
     #Si les deux noeuds de login de romeo sont au même état pas besoin du 2eme
     if(list_server_ok[0][1] == list_server_ok[1][1]):
-        list_server_ok.pop(1)
+        list_server_ok.remove(["romeologin2.univ-reims.fr",1])
 
     print(list_server_ok)
     #Questionnement sur les ressources disponibles

@@ -13,7 +13,8 @@ def handle(mod_in):
     cmdsbatchromeo = f'echo "#!/bin/bash\n#SBATCH --time={mod_in.get("time")}\n#SBATCH --cores={mod_in.get("cores")} \n#SBATCH --nodes={mod_in.get("nodes")} \nmake\nsrun ./{mod_in.get("exec")} > {mod_in.get("name_file")}" > batch.sh'
     cmdexecromeo = 'sbatch batch.sh '
 
-    cmdexecdgx = "nvidia-docker exec" 
+    #Cela ne convient pas au système en place sur la DGX, mais actuellement j'ai pas les droits alors on va dire que
+    cmdexecdgx = f"make && ./{mod_in.get("exec")} > {mod_in.get("name_file")}" 
 
     #Remplacer par un dict ? clé = nom ? 
     #Serait bien d'avoir un service externe à ping pour avoir la liste si c'est mis à jour 
@@ -43,7 +44,7 @@ def handle(mod_in):
 
     #Si les deux noeuds de login de romeo sont au même état pas besoin du 2eme
     if(list_server_ok[0][1] == list_server_ok[1][1]):
-        list_server_ok.pop(1)
+        list_server_ok.remove(["romeologin2.univ-reims.fr",1])
 
     #Questionnement sur les ressources disponibles
     for server_and_ok in list_server_ok:
@@ -91,6 +92,7 @@ def handle(mod_in):
             username="alabille",
             pkey=pkey,
         )
+        client.exec_command(cmdexecdgx)
     else:
         ret = "Pas de ressource"
 
