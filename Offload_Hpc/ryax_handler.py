@@ -84,7 +84,7 @@ def handle(mod_in):
         )
         rb_stdin, rb_stdout, rb_stderr = client.exec_command(cmdsbatchromeo)
         rex_stdin, rex_stdout, rex_stderr = client.exec_command(cmdexecromeo)
-    elif(res_avail_dgx >= mod_in.get("nodes") & mod_in.get("resource") == "gpu"):
+    elif(res_avail_dgx >= mod_in.get("nodes") and mod_in.get("resource") == "gpu"):
         #Exec sur DGX
         client.connect(
             list_server_ok[1][0],
