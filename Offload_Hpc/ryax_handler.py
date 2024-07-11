@@ -10,17 +10,20 @@ def handle(mod_in):
     #On récup les noeuds libres 
     cmdromeo = f'sinfo -h | grep idle | grep -w {mod_in.get("resource")}'
     cmddgx = "nvidia-smi"
-    #cmdsbatchromeo = f'echo "#!/bin/bash\n#SBATCH --time={mod_in.get("time")}\n#SBATCH --nodes={mod_in.get("nodes")} \n#SBATCH --output={mod_in.get("name_file")}\nsrun {mod_in.get("exec")}" > batch.sh'
-    cmdexecromeo = 'sbatch batch.sh > output.out'
+    cmdsbatchromeo = f'echo "#!/bin/bash\n#SBATCH --time={mod_in.get("time")}\n#SBATCH --cores={mod_in.get("cores")} \n#SBATCH --nodes={mod_in.get("nodes")} \nmake\nsrun ./{mod_in.get("exec")} > {mod_in.get("name_file")}" > batch.sh'
+    cmdexecromeo = 'sbatch batch.sh '
 
     cmdexecdgx = "nvidia-docker exec" 
 
     #Remplacer par un dict ? clé = nom ? 
     #Serait bien d'avoir un service externe à ping pour avoir la liste si c'est mis à jour 
-    list_server_ok = [["dgx1.univ-reims.fr",1],["romeologin1.univ-reims.fr",1],["romeologin2.univ-reims.fr",1]]
+    list_server_ok = [["romeologin1.univ-reims.fr",1],["romeologin2.univ-reims.fr",1],["dgx1.univ-reims.fr",1]]
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
+    #Si on veut du temps sur CPU alors la DGX est inutile, à voir si ce système de pop ne peut pas être retiré plus tard
+    if(mod_in.get("resource") == "cpu"):
+        list_server_ok.pop()
     #"Ping" des machines
     for server_and_ok in list_server_ok:
         #Tentative de co SSH avec un timeout de 5s, si on y arrive pas, la machine est considérée injoinable 
@@ -39,8 +42,8 @@ def handle(mod_in):
         client.close()
 
     #Si les deux noeuds de login de romeo sont au même état pas besoin du 2eme
-    if(list_server_ok[1][1] == list_server_ok[2][1]):
-        list_server_ok.pop()
+    if(list_server_ok[0][1] == list_server_ok[1][1]):
+        list_server_ok.pop(1)
 
     #Questionnement sur les ressources disponibles
     for server_and_ok in list_server_ok:
@@ -64,20 +67,36 @@ def handle(mod_in):
     res_avail_romeo = 0 
     res_avail_dgx = 0
 
+    #On récup l'entier des nodes dispos pour la ressource
     if(r_out):
         res_avail_romeo = int(r_out[0].split()[3])
 
-    
-    
+
 
     if(res_avail_romeo >= mod_in.get("nodes")):
-        ret = "Assez de ressource Romeo"
-    elif(res_avail_dgx >= mod_in.get("nodes")):
-        ret = "Assez de ressource DGX"
+        #Exec sur ROMEO
+        client.connect(
+            list_server_ok[0][0],
+            22,
+            username="alabille",
+            pkey=pkey,
+        )
+        rb_stdin, rb_stdout, rb_stderr = client.exec_command(cmdsbatchromeo)
+        rex_stdin, rex_stdout, rex_stderr = client.exec_command(cmdexecromeo)
+    elif(res_avail_dgx >= mod_in.get("nodes") & mod_in.get("resource") == "gpu"):
+        #Exec sur DGX
+        client.connect(
+            list_server_ok[1][0],
+            22,
+            username="alabille",
+            pkey=pkey,
+        )
     else:
         ret = "Pas de ressource"
 
+    client.close()
 
-    err = r_stderr.readlines() + d_stderr.readlines()
+
+    err = r_stderr.readlines() + d_stderr.readlines() + rb_stderr.readlines() + rex_stderr.readlines()
 
     return({"err":"osef","res_DEBUG":ret})

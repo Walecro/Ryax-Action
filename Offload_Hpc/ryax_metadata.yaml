@@ -29,7 +29,7 @@ spec:
     default_value: 1
   - help: Nombre de coeurs demandés 
     human_name: cores
-    name: num_cores
+    name: cores
     type: "integer"
     default_value: 1
   - help: Type de ressource demandée 
@@ -39,6 +39,7 @@ spec:
     enum_values:
       - cpu
       - gpu
+      - gpu-ia
     default_value: cpu
   - help: Nom de l'exécutable +  arguments necéssaires
     human_name: Nom du programme
