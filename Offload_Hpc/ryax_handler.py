@@ -14,7 +14,10 @@ def handle(mod_in):
     cmdexecromeo = 'sbatch batch.sh '
 
     #Cela ne convient pas au système en place sur la DGX, mais actuellement j'ai pas les droits alors on va dire que
-    cmdexecdgx = f'make && ./{mod_in.get("exec")} > {mod_in.get("name_file")}' 
+    cmdexecdgxtmp = f'make && ./{mod_in.get("exec")} > {mod_in.get("name_file")}' 
+    cmddgxcreate = f'nvidia-docker create -t -i --name JD_Ryax_{mod_in.get("exec")}'
+    cmddgxlaunch = f'nvidia-docker start JD_Ryax_{mod_in.get("exec")}'
+
 
     #Remplacer par un dict ? clé = nom ? 
     #Serait bien d'avoir un service externe à ping pour avoir la liste si c'est mis à jour 
@@ -93,7 +96,10 @@ def handle(mod_in):
             username="alabille",
             pkey=pkey,
         )
-        client.exec_command(cmdexecdgx)
+        client.exec_command(cmdexecdgxtmp)
+        client.exec_command(cmddgxcreate)
+        client.exec_command(cmddgxlaunch)
+
         client.close()
     else:
         ret = "Pas de ressource"
