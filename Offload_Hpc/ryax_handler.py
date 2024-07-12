@@ -13,14 +13,14 @@ def handle(mod_in):
     cmdsbatchromeo = f'echo "#!/bin/bash\n#SBATCH --time={mod_in.get("time")}\n#SBATCH --cores={mod_in.get("cores")} \n#SBATCH --nodes={mod_in.get("nodes")} \nmake\nsrun ./{mod_in.get("exec")} > {mod_in.get("name_file")}" > batch.sh'
     cmdexecromeo = 'sbatch batch.sh '
 
-    #Cela ne convient pas au système en place sur la DGX, mais actuellement j'ai pas les droits alors on va dire que
+    #Execution sur DGX non testée pour l'instant, peu probable que fonctionnelle 
     cmdexecdgxtmp = f'make && ./{mod_in.get("exec")} > {mod_in.get("name_file")}' 
     cmddgxcreate = f'nvidia-docker create -t -i --name JD_Ryax_{mod_in.get("exec")}'
     cmddgxlaunch = f'nvidia-docker start JD_Ryax_{mod_in.get("exec")}'
 
 
     #Remplacer par un dict ? clé = nom ? 
-    #Serait bien d'avoir un service externe à ping pour avoir la liste si c'est mis à jour 
+    #Remplacer cette variable avec une variable de projet ? Avec la liste des machines à pourvoir 
     list_server_ok = [["romeologin1.univ-reims.fr",1],["romeologin2.univ-reims.fr",1],["dgx1.univ-reims.fr",1]]
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -82,7 +82,7 @@ def handle(mod_in):
         client.connect(
             list_server_ok[0][0],
             22,
-            username="alabille",
+            username=mod_in.get("ssh_user"),
             pkey=pkey,
         )
         rb_stdin, rb_stdout, rb_stderr = client.exec_command(cmdsbatchromeo)
@@ -93,12 +93,12 @@ def handle(mod_in):
         client.connect(
             list_server_ok[1][0],
             22,
-            username="alabille",
+            username=mod_in.get("ssh_user"),
             pkey=pkey,
         )
         client.exec_command(cmdexecdgxtmp)
-        client.exec_command(cmddgxcreate)
-        client.exec_command(cmddgxlaunch)
+        #client.exec_command(cmddgxcreate)
+        #client.exec_command(cmddgxlaunch)
 
         client.close()
     else:
@@ -108,4 +108,4 @@ def handle(mod_in):
 
     err = r_stderr.readlines() + d_stderr.readlines() + rb_stderr.readlines() + rex_stderr.readlines()
 
-    return({"err":"osef","res_DEBUG":err})
+    return({"err":err,"res_DEBUG":ret})
